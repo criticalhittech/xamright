@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ListView HasUnevenRows="False">
+  <ListView.ItemTemplate>
+    <StackLayout>     
+    </StackLayout>
+  </ListView.ItemTemplate>
+  <ListView.GroupHeaderTemplate>
+    <StackLayout>
+    </StackLayout>
+  </ListView.GroupHeaderTemplate>
+</ListView>

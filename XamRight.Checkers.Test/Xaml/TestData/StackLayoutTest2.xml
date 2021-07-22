@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout Orientation="Horizontal">
+  <Label HorizontalOptions="Center"/>
+  <Button VerticalOptions="CenterAndExpand"/>
+  <RelativeLayout HorizontalOptions="Center"></RelativeLayout>
+</StackLayout>

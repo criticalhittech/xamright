@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CollectionView>
+  <CollectionView.ItemTemplate>
+    <DataTemplate>
+      <SwipeView>
+        <SwipeView.LeftItems>
+          <SwipeItems>
+            <SwipeItem Text="Swipe Left"></SwipeItem>
+          </SwipeItems>
+        </SwipeView.LeftItems>
+        <Grid BackgroundColor="White"></Grid>
+      </SwipeView>
+    </DataTemplate>
+  </CollectionView.ItemTemplate>
+</CollectionView>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ListView HasUnevenRows="True">
+  <ListView.ItemTemplate>
+    <DataTemplate>
+      <ViewCell>
+        <ViewCell.ContextActions>
+          <MenuItem/>
+        </ViewCell.ContextActions>
+        <Label Text="ListView Item" />
+      </ViewCell>
+    </DataTemplate>
+  </ListView.ItemTemplate>
+  <ListView.GroupHeaderTemplate>
+    <DataTemplate>
+      <StackLayout>
+        <Label Text="ListView GroupItem" />
+      </StackLayout>
+    </DataTemplate>
+  </ListView.GroupHeaderTemplate>
+</ListView>

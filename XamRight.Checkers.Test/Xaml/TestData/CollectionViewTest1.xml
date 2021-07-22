@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CollectionView SelectionChanged="CollectionView_SelectionChanged">
+  <CollectionView.ItemTemplate>
+    <StackLayout>
+    </StackLayout>
+  </CollectionView.ItemTemplate>
+</CollectionView>

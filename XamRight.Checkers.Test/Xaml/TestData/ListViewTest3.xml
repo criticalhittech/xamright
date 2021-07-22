@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ListView HasUnevenRows="True">
+  <ListView.HeaderTemplate>
+    <DataTemplate>
+      <ViewCell>
+        <Label Text="ListView Header" />
+      </ViewCell>
+    </DataTemplate>
+  </ListView.HeaderTemplate>
+  <ListView.FooterTemplate>
+    <DataTemplate>
+      <ViewCell>
+        <Label Text="ListView Footer" />
+      </ViewCell>
+    </DataTemplate>
+  </ListView.FooterTemplate>
+</ListView>
