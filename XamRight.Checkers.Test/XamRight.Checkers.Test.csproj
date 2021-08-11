@@ -87,6 +87,9 @@
     <Content Include="Xaml\TestData\AbsoluteLayoutTest1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Xaml\TestData\AccessibilityDuplicateTextTest1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Xaml\TestData\BindableLayoutTest1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

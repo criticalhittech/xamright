@@ -23,7 +23,7 @@ namespace XamRight.Checkers.Test.Xaml
             var warningService = new MockWarningService();
             var contextService = new MockContextService(MockContextService.XamlMode.XamarinForms);
 
-            var testFile = @"Xaml\TestData\AccessibilityMultipleIdenticalTextTest1.xml";
+            var testFile = @"Xaml\TestData\AccessibilityDuplicateTextTest1.xml";
             var parser = new XmlParser(testFile);
             var rootNode = parser.ParseFile();
 
@@ -40,7 +40,7 @@ namespace XamRight.Checkers.Test.Xaml
             var warningService = new MockWarningService();
             var contextService = new MockContextService(MockContextService.XamlMode.XamarinForms);
 
-            var testFile = @"Xaml\TestData\AccessibilityMultipleIdenticalTextTest1.xml";
+            var testFile = @"Xaml\TestData\AccessibilityDuplicateTextTest1.xml";
             var parser = new XmlParser(testFile);
             var rootNode = parser.ParseFile();
 
