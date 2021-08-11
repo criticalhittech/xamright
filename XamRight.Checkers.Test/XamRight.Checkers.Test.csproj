@@ -48,6 +48,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
+    <Reference Include="XamRight.Extensibility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\XamRight.Extensibility.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mocks\MockCodeFixData.cs" />
@@ -77,10 +81,6 @@
     <ProjectReference Include="..\XamRight.Checkers\XamRight.Checkers.csproj">
       <Project>{7392821b-89f1-4406-ab94-ca489cb1f7df}</Project>
       <Name>XamRight.Checkers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XamRight.Extensibility\XamRight.Extensibility.csproj">
-      <Project>{c5a42037-9d43-4dad-8d62-224df38547d4}</Project>
-      <Name>XamRight.Extensibility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

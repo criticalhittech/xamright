@@ -12,7 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XamRight.Extensibility\XamRight.Extensibility.csproj" />
+    <Reference Include="XamRight.Extensibility">
+      <HintPath>..\lib\XamRight.Extensibility.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
