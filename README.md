@@ -20,6 +20,10 @@ using new language features.
 
 This project defines the interface into XamRight that you can use to write your checkers.
 
+Note that the source code provided is only for reference. Any checker implementation must
+link to a XamRight.Extensibility.dll library built as part of the official signed build
+process, and included in lib with this repo.
+
 At a high level, the parts of the Extensibilty project have the following roles:
 
 __AnalysisContext__
@@ -29,25 +33,53 @@ is passed to the checker at runtime and may be queried as needed to perform anal
 
 __Checkers__
 
-These are the main classes and interfaces you need to implement checkers. 
+These are the interfaces you need to implement in order to define a checker. 
 Each XamRight checker requires two primary classes to define its behavior:
-
+<a name="checkerCode"></a>
 ```
 [XamRightChecker]
-public SampleChecker : IXamlChecker
-{
-    IXamlNodeChecker GetCheckerForNode(
-        IXmlSyntaxNode node, WarningService warningService, ContextService contextService);
-}
+ public class SampleChecker : IXamlChecker
+ {
+    public IXamlNodeChecker GetCheckerForNode(IXmlSyntaxNode node, WarningService warningService, ContextService contextService)
+    {
+        return new SampleNodeChecker(node, warningService, contextService);
+    }
+ }
 
-public SampleNodeChecker : IXamlNodeChecker
-{
-    void CheckNode(IXmlSyntaxNode node);
-    bool ShouldCheckAttributesOnNode(IXmlSyntaxNode node);
-    void CheckAttribute(IXmlSyntaxNode node, IXmlSyntaxAttribute attribute);
-    void NodeComplete(IXmlSyntaxNode node);
-    void CheckerComplete();
-}
+ public class SampleNodeChecker : IXamlNodeChecker
+ {
+    private IXmlSyntaxNode _rootNode;
+    private WarningService _warningService;
+    private ContextService _contextService;
+
+    public SampleNodeChecker(IXmlSyntaxNode node, WarningService warningService, ContextService contextService)
+    {
+        _rootNode = node;
+        _warningService = warningService;
+        _contextService = contextService;
+    }
+
+    public void CheckAttribute(IXmlSyntaxNode node, IXmlSyntaxAttribute attribute)
+    {
+    }
+
+    public void CheckerComplete()
+    {
+    }
+
+    public void CheckNode(IXmlSyntaxNode node)
+    {
+    }
+
+    public void NodeComplete(IXmlSyntaxNode node)
+    {
+    }
+
+    public bool ShouldCheckAttributesOnNode(IXmlSyntaxNode node)
+    {
+        return false;
+    }
+ }
 ```
 
 The checkers to run are identified by XamRight using the `[XamRightChecker]` attribute on implementations
@@ -89,11 +121,17 @@ New warnings are defined in checkers with the `WarningDefinition` class.  All pr
 __Xml__
 
 These are interfaces for classes defined by XamRight to represent the syntax of Xaml files (which is, of course, Xml).
+Unlike the interfaces in Checkers, these are implemented by the XamRight engine and passed to checkers,
+not defined by implementers of checkers.
+
 
 ### XamRight.Checkers ###
 
 This is the project that contains the checkers that XamRight runs out of the box based on the
 Extensibility project.  
+
+Use these as examples of the power of checkers.  You can also build and run these with
+the unit test project (below) in the debugger to understand how these are called.
 
 ### XamRight.Checkers.Test ###
 
@@ -111,3 +149,52 @@ When adding XML TestData files, make sure to set the Build Action to `Copy Alway
 (the default is `Don't Copy`), or else it won't be visible when the unit tests
 are executed.
 
+## Developing Custom Checkers
+
+We recommend using this solution as a framework, with a checker project and a
+unit test project, customizing the names and namespaces.
+
+By using the unit test scaffolding provided in XamRight.Checkers.Test, you can
+validate your checker quickly and easily.  And besides, unit test are good :-)
+
+<ins> Step by step instructions on how to build a Custom Checker </ins>
+
+1. Clone this repository onto your machine.
+2. Open the solution with Visual Studio 2017 or 2019.
+3. Add a new .NET Standard class library project to the solution (This is the project that will be built and later added as a Custom Extension).
+4. Add a reference to the XamRight.Extensibility.dll located in the /lib folder (Adding a direct reference to the XamRight.Extensibility project will not work).
+5. Add a new file for the Checker you want to add to the project.
+6. Implement an instance of IXamlChecker and IXamlNodeChecker or you can start by copying & pasting the [boilerplate code](#checkerCode) above. You can also use the Checkers in XamRight.Checkers/Xaml as a reference.
+7. After you've completed writing up your Checkers, set the build to Release and proceed to build your class library.
+8. The compiled .dll file should be located in the bin/Release/netstandard2.0/ folder
+
+Then in Visual Studio, open the window at:
+
+>    Tools > Options > XamRight > Custom XamRight Extensions
+
+Select the [...] button to browse to your new checker dll, select it, and load.
+XamRight will copy the dll into its cache, so you don't have to worry about
+overwriting it.
+
+You can add multiple checkers, enable and disable them (using the check mark next to each),
+replace them, or delete them.  Two important notes:
+1. In order to replace or delete a checker, you have to restart Visual Studio after making the change in the XamRight UI.
+2. XamRight only copies the checker DLL itself. If you add references to your checker besides
+what's available in .NET Standard 1.3 and XamRight.Extensibility, your checker may fail to load.
+
+## Updating XamRight.Checkers
+
+If there are bugs in XamRight.Checkers, or additions you would like to submit,
+we welcome Pull Requests.  To test your version of XamRight.Checkers, you need
+to deactivate the built in XamRight.Checker.dll before trying to load your version.
+
+<ins> Step by step instructions on how to extend XamRight.Checker.dll </ins>
+
+1. Clone this repository onto your machine.
+2. Open the solution with Visual Studio 2017 or 2019.
+3. Make the necessary changes to the XamRight.Checker project.
+4. After you're done, set the build to Release and proceed to build the XamRight.Checker project.
+5. The compiled XamRight.Checker.dll file should be located in the bin/Release/netstandard2.0/ folder.
+6. To test out your changes, disable the build in XamRight.Checker.dll on the Custom XamRight Extensions page and restart Visual Studio.
+7. After you've restarted Visual Studio, you can proceed to add your updated version of XamRight.Checker.dll with the built in one disabled 
+  (Note that when testing out an updated version of a built in Checker, it is required that the file name matches the built in one, in this case XamRight.Checker.dll).
