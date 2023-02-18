@@ -20,7 +20,7 @@ namespace XamRight.Checkers {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class MessageResources {
@@ -215,7 +215,7 @@ namespace XamRight.Checkers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The text set for the &apos;{0}&apos; property, to identify or describe the &apos;{1}&apos; control is also used on &apos;{2}&apos;. Consider setting unique descriptions for each control to distinguish their purpose, especially for screen reader users..
+        ///   Looks up a localized string similar to The text set for &apos;{0}&apos; to describe &apos;{1}&apos; is also used on &apos;{2}&apos;. Consider unique control descriptions so screen reader users can distinguisih them..
         /// </summary>
         internal static string MultipleElementsWithIdenticalTextWarning {
             get {

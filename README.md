@@ -4,15 +4,13 @@
 
 __Windows__
 
-Visual Studio 2017 is the primary development platform.  While you can do your development
-in VS 2019, XamRight production builds use VS 2017 in order to be able to be used as a
-VS 2017 extension.  This means that in the end you can't take dependencies on any language
-feature not available in VS 2017.
+Since XamRight is compatible with both Visual Studio 2019 and 2022, both may be used for
+development. However no language dependencies can be taken that aren't supported by Visual Studio 2019.
 
 __Mac__
 
-Visual Studio Mac 2019 is the development environment, but see notes above about not
-using new language features.
+Visual Studio for Mac 2022 support for extensions is still in development. Substantial rework was needed
+between Visual Studio for Mac 2019 and 2022, unfortunately, and that is not yet complete.
 
 ## Component Overview ##
 

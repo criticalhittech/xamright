@@ -142,7 +142,7 @@
     <value>StackLayout element has a single child {0}; consider removing StackLayout to improve layout performance</value>
   </data>
   <data name="MultipleElementsWithIdenticalTextWarning" xml:space="preserve">
-    <value>The text set for the '{0}' property, to identify or describe the '{1}' control is also used on '{2}'. Consider setting unique descriptions for each control to distinguish their purpose, especially for screen reader users.</value>
+    <value>The text set for '{0}' to describe '{1}' is also used on '{2}'. Consider unique control descriptions so screen reader users can distinguisih them.</value>
   </data>
   <data name="RedundantLayoutOptionsOnRelativeLayoutChildWarning" xml:space="preserve">
     <value>'{0}' declaration on child view of RelativeLayout is ignored. Use RelativeLayout's Constraint properties to position views</value>
