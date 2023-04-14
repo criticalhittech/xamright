@@ -45,6 +45,15 @@ namespace XamRight.Checkers.Xaml
             Category = WarningCategory.OtherXAMLErrors,
         };
 
+        private static readonly WarningDefinition collectionViewSelectionChangedNotFiredErrDef = new WarningDefinition()
+        {
+            Number = 5109,
+            Severity = WarningSeverity.Warning,
+            MessageFormat = MessageResources.CollectionViewSelectionChangedDoesNotGetFiredWhenUsingFrameLayout,
+            Category = WarningCategory.OtherXAMLErrors,
+            HelpLinkUri = "https://github.com/dotnet/maui/issues/9567"
+        };
+
         public CollectionViewNodeChecker(IXmlSyntaxNode rootNode, WarningService warningService, ContextService contextService)
         {
             _rootNode = rootNode;
@@ -87,6 +96,7 @@ namespace XamRight.Checkers.Xaml
             if (node.Tag.EndsWith(".ItemTemplate"))
             {
                 AddDataTemplateWarning(node);
+                AddSelectionChangedDoesNotGetFiredWarning(node);
             }
 
             if (node.Children.Any()
@@ -114,6 +124,32 @@ namespace XamRight.Checkers.Xaml
                         _warningService.AddNodeTagWarning(dataTemplateNode.Children[0], collectionViewDataTemplateContentErrDef, null);
                     }
                 }
+            }
+        }
+
+        private void AddSelectionChangedDoesNotGetFiredWarning(IXmlSyntaxNode itemTemplateNode)
+        {
+            if (!_contextService.IsMaui)
+                return;
+
+            if (_collectionViewSelectionChangedAttribute == null)
+                return;
+
+            AddSelectionChangedDoesNotGetFiredWarningIfIsFrameLayout(itemTemplateNode);
+        }
+
+        private void AddSelectionChangedDoesNotGetFiredWarningIfIsFrameLayout(IXmlSyntaxNode node)
+        {
+            if (node.Children == null || node.Children.Count == 0)
+                return;
+
+            foreach (var childNode in node.Children)
+            {
+                if(_contextService.DoesNodeSymbolDeriveFromBaseType(childNode, "Microsoft.Maui.Controls.Frame"))
+                {
+                    _warningService.AddNodeTagWarning(childNode, collectionViewSelectionChangedNotFiredErrDef, null);
+                }
+                AddSelectionChangedDoesNotGetFiredWarningIfIsFrameLayout(childNode);
             }
         }
 
@@ -161,7 +197,7 @@ namespace XamRight.Checkers.Xaml
                 return null;
 
             //Xamarin.Forms only supports CollectionView starting from Version 4.3
-            if (contextService.IsXamarinForms && !contextService.IsXamarinFormsVersionSupported(VersionEnum.V_4_3))
+            if (contextService.IsXamarinForms && !contextService.IsXamarinFormsVersionSupported(XamarinFormsVersionEnum.V_4_3))
                 return null;
 
             if (CollectionViewNodeChecker.IsCollectionView(node, contextService))

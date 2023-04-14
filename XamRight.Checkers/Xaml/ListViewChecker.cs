@@ -21,7 +21,7 @@ namespace XamRight.Checkers.Xaml
 
         public static readonly WarningDefinition MissingAutomationPropertiesToHintListViewContextActionsDef = new WarningDefinition()
         {
-            Number = 5913,
+            Number = 5919,
             Severity = WarningSeverity.Warning,
             MessageFormat = MessageResources.MissingAutomationPropertiesToHintListViewContextActionsWarning,
             Category = WarningCategory.Accessibility

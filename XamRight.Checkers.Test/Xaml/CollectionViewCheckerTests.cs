@@ -83,7 +83,7 @@ namespace XamRight.Checkers.Test.Xaml
             checkerRunner.CheckTree(rootNode);
 
             Assert.AreEqual(1, warningService.Warnings.Count);
-            Assert.AreEqual(5913, warningService.Warnings[0].WarningDefinition.Number);
+            Assert.AreEqual(5919, warningService.Warnings[0].WarningDefinition.Number);
             Assert.AreEqual(0, warningService.CodeFixes.Count);
         }
     }

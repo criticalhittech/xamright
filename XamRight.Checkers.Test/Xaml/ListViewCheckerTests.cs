@@ -65,7 +65,7 @@ namespace XamRight.Checkers.Test.Xaml
             checkerRunner.CheckTree(rootNode);
 
             Assert.AreEqual(2, warningService.Warnings.Count);
-            Assert.IsTrue(warningService.Warnings.Any(w => w.WarningDefinition.Number == 5913));
+            Assert.IsTrue(warningService.Warnings.Any(w => w.WarningDefinition.Number == 5919));
             Assert.IsTrue(warningService.Warnings.Any(w => w.WarningDefinition.Number == 5036));
             Assert.AreEqual(0, warningService.CodeFixes.Count);
         }

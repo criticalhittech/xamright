@@ -198,4 +198,7 @@
   <data name="ButtonCommandIsEnabledWarning" xml:space="preserve">
     <value>IsEnabled on Button with Command may misbehave; prefer Command.CanExecute to IsEnabled</value>
   </data>
+  <data name="CollectionViewSelectionChangedDoesNotGetFiredWhenUsingFrameLayout" xml:space="preserve">
+    <value>CollectionView.SelectionChanged will not get triggered when tapping on Frame layout and its child views</value>
+  </data>
 </root>

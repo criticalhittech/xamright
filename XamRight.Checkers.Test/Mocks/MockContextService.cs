@@ -44,9 +44,14 @@ namespace XamRight.Checkers.Test.Mocks
             return false;
         }
 
-        public override bool IsXamarinFormsVersionSupported(VersionEnum version)
+        public override bool IsXamarinFormsVersionSupported(XamarinFormsVersionEnum version)
         {
-            return true;
+            return IsXamarinForms;
+        }
+
+        public override bool IsMauiVersionSupported(MauiVersionEnum version)
+        {
+            return IsMaui;
         }
     }
 }

@@ -107,7 +107,7 @@ namespace XamRight.Checkers.Xaml
                 return null;
 
             //Xamarin.Forms only supports BindableLayout starting from Version 3.5
-            if (contextService.IsXamarinForms && !contextService.IsXamarinFormsVersionSupported(VersionEnum.V_3_5))
+            if (contextService.IsXamarinForms && !contextService.IsXamarinFormsVersionSupported(XamarinFormsVersionEnum.V_3_5))
                 return null;
 
             return new BindableLayoutNodeChecker(node, warningService, contextService);

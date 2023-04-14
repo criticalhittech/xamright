@@ -7,7 +7,7 @@ using XamRight.Extensibility.Xml;
 
 namespace XamRight.Extensibility.AnalysisContext
 {
-    public enum VersionEnum
+    public enum XamarinFormsVersionEnum
     {
         Pre_V_3_5,
         V_3_5,
@@ -16,13 +16,20 @@ namespace XamRight.Extensibility.AnalysisContext
         V_4_7
     }
 
+    public enum MauiVersionEnum
+    {
+        Maui6,
+        Maui7,
+    }
+
     public abstract class ContextService
     {
         public abstract bool IsXamarinForms { get; }
         public abstract bool IsWpf { get; }
         public abstract bool IsMaui { get; }
 
-        public abstract bool IsXamarinFormsVersionSupported(VersionEnum version);
+        public abstract bool IsXamarinFormsVersionSupported(XamarinFormsVersionEnum version);
+        public abstract bool IsMauiVersionSupported(MauiVersionEnum version);
 
         /// <summary>
         /// The basetype string here can be the fully qualified type name (eg. Xamarin.Forms.ListView) or the short name (eg. ListView) 
