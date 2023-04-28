@@ -1,4 +1,20 @@
-# XamRight Extensibility #
+# XamRight #
+
+Welcome to XamRight, the most advanced analysis tool for Xaml-based applications. This repo contains an extensibility framework so you can author your own rules to run as part of XamRight.
+
+## Overview of Projects ##
+
+|Project|Description|
+|---|---|
+|XamRight.Checkers|A set of rules that ship as part of XamRight which use the Extensibility framework.|
+|XamRight.Checkers.Test|Test project for XamRight.Checkers.|
+|XamRight.Extensibility|Code which drives the extensions and defines various interfaces and utilities needed by extensions.|
+
+## Contributing code or Issues ##
+
+We welcome contributions of code to improve the checker. Also feel free to use the Issues here for anything related to XamRight or the extensibility code.
+
+# Guide to XamRight Extensibility #
 
 ## Development Environment ##
 
@@ -10,7 +26,7 @@ development. However no language dependencies can be taken that aren't supported
 __Mac__
 
 Visual Studio for Mac 2022 support for extensions is still in development. Substantial rework was needed
-between Visual Studio for Mac 2019 and 2022, unfortunately, and that is not yet complete.
+between Visual Studio for Mac 2019 and 2022 due to changes to the add-in model, unfortunately, and that is not yet complete.
 
 ## Component Overview ##
 
@@ -35,7 +51,7 @@ These are the interfaces you need to implement in order to define a checker.
 Each XamRight checker requires two primary classes to define its behavior:
 <a name="checkerCode"></a>
 ```
-[XamRightChecker]
+ [XamRightChecker]
  public class SampleChecker : IXamlChecker
  {
     public IXamlNodeChecker GetCheckerForNode(IXmlSyntaxNode node, WarningService warningService, ContextService contextService)
