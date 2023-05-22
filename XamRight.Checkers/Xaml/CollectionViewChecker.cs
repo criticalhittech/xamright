@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XamRight.Checkers.Infrastructure;
 using XamRight.Extensibility.AnalysisContext;
 using XamRight.Extensibility.Checkers;
 using XamRight.Extensibility.Warnings;
@@ -155,8 +156,9 @@ namespace XamRight.Checkers.Xaml
 
         private void CheckSwipeViewHasAutomationProperties(IXmlSyntaxNode node)
         {
-            if (!node.Children.Any(child => child.Attributes.Any(attr => attr.Name == "AutomationProperties.Name" ||
-                                                                         attr.Name == "AutomationProperties.HelpText")))
+            var automationProperties = _contextService.IsMaui ? AccessibilityProperties.MauiAutomationProperties : AccessibilityProperties.XamAutomationProperties;
+
+            if (!node.Children.Any(child => child.Attributes.Any(attr => automationProperties.Contains(attr.Name))))
             {
                 _warningService.AddNodeTagWarning(node,
                                                   ListViewNodeChecker.MissingAutomationPropertiesToHintListViewContextActionsDef,

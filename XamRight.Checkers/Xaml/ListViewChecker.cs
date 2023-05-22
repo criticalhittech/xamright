@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XamRight.Checkers.Infrastructure;
 using XamRight.Extensibility.AnalysisContext;
 using XamRight.Extensibility.Checkers;
 using XamRight.Extensibility.Warnings;
@@ -215,9 +216,10 @@ namespace XamRight.Checkers.Xaml
 
         private void CheckViewCellHasAutomationProperties(IXmlSyntaxNode viewCellNode)
         {
+            var automationProperties = _contextService.IsMaui ? AccessibilityProperties.MauiAutomationProperties : AccessibilityProperties.XamAutomationProperties;
+
             if (viewCellNode.Children.Any(child => child.Tag.EndsWith(".ContextActions"))
-                && !viewCellNode.Children.Any(child => child.Attributes.Any(attr => attr.Name == "AutomationProperties.Name" ||
-                                                                                   attr.Name == "AutomationProperties.HelpText")))
+                && !viewCellNode.Children.Any(child => child.Attributes.Any(attr => automationProperties.Contains(attr.Name))))
             {
                 _warningService.AddNodeTagWarning(viewCellNode, 
                                                   MissingAutomationPropertiesToHintListViewContextActionsDef, 

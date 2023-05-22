@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using XamRight.Checkers.Infrastructure;
 using XamRight.Extensibility.AnalysisContext;
 using XamRight.Extensibility.Checkers;
 using XamRight.Extensibility.Utilities;
@@ -17,8 +18,6 @@ namespace XamRight.Checkers.Xaml
         private ContextService _contextService;
         private Dictionary<string, HashSet<IXmlSyntaxNode>> _textToNode = new Dictionary<string, HashSet<IXmlSyntaxNode>>();
 
-        private static readonly HashSet<string> _textPropertiesToCheckXam = new HashSet<string> { "Text", "AutomationProperties.Name", "AutomationProperties.HelpText" };
-        private static readonly HashSet<string> _textPropertiesToCheckWPF = new HashSet<string> { "AutomationProperties.Name", "AutomationProperties.HelpText" };
         private static readonly WarningDefinition multipleIdenticalTextDef = new WarningDefinition()
         {
             Number = 5915,
@@ -35,7 +34,13 @@ namespace XamRight.Checkers.Xaml
 
         public void CheckAttribute(IXmlSyntaxNode node, IXmlSyntaxAttribute attribute)
         {
-            var textPropertiesToCheck = _contextService.IsXamarinForms ? _textPropertiesToCheckXam : _textPropertiesToCheckWPF;
+            var textPropertiesToCheck = new HashSet<string>(AccessibilityProperties.XamAutomationProperties) { "Text" };
+
+            if (_contextService.IsMaui)
+                textPropertiesToCheck = new HashSet<string>(AccessibilityProperties.MauiAutomationProperties) { "Text" };
+            else if (_contextService.IsWpf)
+                textPropertiesToCheck = AccessibilityProperties.WpfAutomationProperties;
+
             if (textPropertiesToCheck.Contains(attribute.Name) &&
                 !String.IsNullOrEmpty(attribute.Value) &&
                 //ignore markups
